@@ -5,7 +5,6 @@ $(function () {
 		$(this).addClass($(this).attr('name'));
 	});
 
-	var autoscroll = $('.autoscroll').is(':checked');
 	var $messages = $('#messages')
 
 	var recent = [];
@@ -45,7 +44,7 @@ $(function () {
 			var $message = createMessage(message, timeline.columns);
 			$messages.append($message);
 
-			if (autoscroll && $message.is(':visible')) {
+			if ($message.is(':visible')) {
 				var parent = $message.parent()[0];
 				parent.scrollTop = $message[0].offsetTop - parent.offsetTop;
 			}
@@ -62,8 +61,8 @@ $(function () {
 	createMessageHeaders(timeline.columns);
 	fillChannelList(timeline.channels);
 	createMarkers(timeline.history, function () {
-		recent = [];
 		timeline.setPosition(timeline.history[$(this).text()]);
+		recent = [];
 		$('#messages').children(':not(.header)').remove();
 	});
 
@@ -74,10 +73,6 @@ $(function () {
 			timeline.start();
 		else
 			timeline.pause();
-	});
-
-	$('.autoscroll').change(function () {
-		autoscroll = $(this).is(':checked');
 	});
 
 	$('.speed').on('input', function () {
