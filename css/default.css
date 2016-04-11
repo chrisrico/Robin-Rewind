@@ -1,0 +1,66 @@
+body {
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+}
+
+nav {
+	flex: 0 1 auto;
+	margin: 1em;
+}
+
+nav:first-child .form-group {
+	float: left;
+}
+
+.form-group + .form-group {
+	padding: 0 1em;
+}
+
+.form-group.separator {
+	border-left: solid 1px black;
+}
+
+.speed {
+	width: 300px !important;
+}
+
+input, select {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+label.right {
+	float: right;
+}
+
+label + label {
+	margin-left: 2em;
+}
+
+#messages {
+	flex: 1 1 auto;
+	font-family: 'Lucida Console';
+	font-size: 12px;
+	margin: 0 1em;
+	overflow-x: auto;
+	overflow-y: auto;
+	padding: 0 1em;
+	white-space: pre;
+}
+
+.message span+span {
+	margin-left: 1em;
+}
+
+.message .channel {
+	display: inline-block;
+	width: 4em;
+}
+
+.pagination {
+	border: none;
+	box-shadow: none;
+	margin-top: 0;
+	padding: 0;
+}

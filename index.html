@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Robin Rewind</title>
+<!-- <link rel="icon" type="image/png" href="img/favicon.png" /> -->
+
+<!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/default.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="container-fluid">
+	<nav class="form">
+		<div class="form-group">
+			<label for="active">Active</label>
+			<input type="checkbox" name="active" class="form-control" checked>
+		</div>
+		<div class="form-group">
+			<label for="autoscroll">Autoscroll</label>
+			<input type="checkbox" name="autoscroll" class="form-control" checked>
+		</div>
+		<div class="form-group">
+			<label for="speed">Speed</span>
+			<label for="speed">1x</label>
+			<input type="range" name="speed" class="form-control" min="1" max="100" value="1">
+		</div>
+		<div class="form-group">
+			<label for="fontUp">Font Size</label><br/>
+			<button type="button" name="fontDown" class="btn btn-default">-</button>
+			<button type="button" name="fontUp" class="btn btn-default">+</button>
+		</div>
+		<div class="form-group separator">
+			<label for="filter-channel">Channel</label>
+			<select class="form-control" name="filter-channel">
+				<option></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="filter-votes">Votes</label>
+			<input type="checkbox" name="filter-votes" class="form-control" checked>
+		</div>
+		<div class="form-group">
+			<label for="filter-spam">Spam</label>
+			<input type="checkbox" name="filter-spam" class="form-control" checked>
+		</div>
+		<div class="form-group">
+			<label for="rate">Rate</label>
+			<p name="rate" class="form-control-static"></p>
+		</div>
+	</nav>
+	<div id="messages" class="well">
+	</div>
+	<nav class="row">
+		<div class="col-md-4">
+			<label for="history">History</label>
+			<ul name="history" class="pagination form-control"></ul>
+		</div>
+		<div class="col-md-8">
+			<label for="seek">Seek</label>
+			<label for="seek" class="right"></label>
+			<input type="range" name="seek" class="form-control" min="0" max="1000">
+		</div>
+	</nav>
+
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.js"></script>
+
+	<!-- My scripts -->
+	<script src="js/timeline.js"></script>
+	<script src="js/messages.js"></script>
+	<script src="js/page.js"></script>
+</body>
+</html>
