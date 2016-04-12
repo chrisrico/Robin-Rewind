@@ -1,4 +1,4 @@
-var filter = {channel: null, votes: true, spam: true, system: true};
+var filter = {channel: null, votes: false, spam: false, system: false};
 
 $(function () {
 	$('[name]').each(function () {
@@ -105,22 +105,15 @@ $(function () {
 		}
 	});
 
-	$('.filter-votes').change(function () {
-		filter.votes = $(this).is(':checked');
-		if (filter.votes) {
-			$('.message.vote').show();
-		} else {
-			$('.message.vote').hide();
-		}
-	});
-
-	$('.filter-spam').change(function () {
-		filter.spam = $(this).is(':checked');
-		if (filter.spam) {
-			$('.message.spam').show();
-		} else {
-			$('.message.spam').hide();
-		}
+	['vote', 'system', 'spam'].forEach(function (tag) {
+		$('.filter-' + tag).change(function () {
+			filter[tag] = !$(this).is(':checked');
+			if (filter[tag]) {
+				$('.message.' + tag).hide();
+			} else {
+				$('.message.' + tag).show();
+			}
+		});
 	});
 
 	$('.seek').on('input', function () {
@@ -155,25 +148,15 @@ function createMessageHeaders(columns) {
 function createMessage(message, columns) {
 	var $message = $('<div class="message"></div>');
 
-	var isVote = message.message.match(/^voted to (GROW|STAY|ABANDON)$/);
-	if (isVote)
-		$message.addClass('vote');
-
-	var isSystem = message.user == '[robin]';
-	if (isSystem)
-		$message.addClass('system')
-
-	var isSpam = message.message.length > 120;
-	if (isSpam)
-		$message.addClass('spam');
+	['vote', 'system', 'spam'].forEach(function (tag) {
+		if (message[tag]) {
+			$message.addClass(tag);
+			if (filter[tag])
+				$message.hide();
+		}
+	});
 
 	if (filter.channel && message.channel !== filter.channel)
-		$message.hide();
-	if (!filter.spam && isSpam)
-		$message.hide();
-	if (!filter.system && isSystem)
-		$message.hide();
-	if (!filter.votes && isVote)
 		$message.hide();
 
 	function addProperty(key, value) {

@@ -52,6 +52,8 @@ function Timeline(messages, options) {
 	this.channels = channels;
 	this.columns = columns;
 
+	var spamDetector = {};
+
 	var elapsed = messages[messages.length - 1].timestamp - messages[0].timestamp;
 	for (var i = 0, message; message = messages[i]; i++) {
 		var previous = messages[i - 1];
@@ -74,6 +76,31 @@ function Timeline(messages, options) {
 		for (var key in columns) {
 			if (key in message && message[key].length > columns[key])
 				columns[key] = message[key].length;
+		}
+
+		if (message.user == '[robin]')
+			message.system = true;
+
+		if (message.message.match(/^voted to (GROW|STAY|ABANDON)$/))
+			message.vote = true;
+
+		if (message.message.match(/[^\u0000-\u00ff]/))
+			message.spam = true;
+
+		if (message.system || message.vote || message.spam)
+			continue;
+
+		if (!spamDetector.hasOwnProperty(message.message))
+			spamDetector[message.message] = [];
+		spamDetector[message.message].push(i);
+	}
+
+	for (var message in spamDetector) {
+		var indexes = spamDetector[message];
+		if (indexes.length > 5) {
+			indexes.forEach(function (i) {
+				messages[i].spam = true;
+			});
 		}
 	}
 
