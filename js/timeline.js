@@ -17,13 +17,13 @@ function formatTs(timestamp) {
 	return [pad(ts.getHours(), -2), pad(ts.getMinutes(), -2), pad(ts.getSeconds(), -2)].join(':');
 }
 
-var channelRe = /\s*([:%][\w]+|[#%`*~?$@^.&!:_+]{1,3}|<3|<>|!nl|;20qs|\(=\))/;
+var channelRe = /\s*([:%#][\w]+|[#%`*~?$@^.&!:_+]{1,3}|<3|<>|!nl|;20qs|\(=\))/;
 function fixChannel(message) {
 	if (!message.channel)
 		return;
 
-	var match;
-	if (match = message.channel.match(channelRe)) {
+	var match = message.channel.match(channelRe);
+	if (match) {
 		message.message = message.channel.replace(match[1], '') + message.message;
 		message.channel = match[1];
 	} else {
